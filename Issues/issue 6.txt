@@ -1,0 +1,21 @@
+DESCRIPTION
+-----------
+Too many files!  Will have to reorganise things.
+   Michael's note:  require can be a bit weird with items in subfolders.
+
+Investigating
+-------------
+It was very easy to move the images and sounds to an assets subfolder.  newSource, newImage, etc. are fine with filenames that have directories.
+   If I want to put lua folders in subdirectories, then it seems that:
+1) I can either mess around with package.path to put the subdirectories in package.path
+2) require('subfolder.filename.lua') might work.
+
+Putting lua files in subfolders
+-------------------------------
+I tested this by putting assets.lua in the assets subfolder, then changing the require statement in love.load() as follows:
+
+require('assets.assets');
+
+This worked.
+
+I am considering if I need to do this.  With the asset files in their own subfolder, the listing of files will now fit on one screen again.

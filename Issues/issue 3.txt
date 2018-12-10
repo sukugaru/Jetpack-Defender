@@ -1,0 +1,16 @@
+Pausing is currently done by player.lua and is down by looking for an isDown on escape.  This is obiouvsly causing the problem.
+
+Trying out a fix:
+ - Removing the isDown(escape) from player
+ - Putting a check on escape in game.keypressed
+
+Testing:
+ - Press escape in game and make sure it still pauses (yes)
+ - Press escape again and make sure it unpauses (yes)
+ - Press space in pause mode and make sure it unpauses (yes)
+ - Press space in game and make sure it doesn't pause.  (No)
+   Was overzealous in copying code over.  Removed space bar from the 'go into pause mode' check.
+
+Code changes
+game.lua (v0.1.2)
+player.lua (v0.1.1)

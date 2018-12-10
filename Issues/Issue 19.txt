@@ -1,0 +1,30 @@
+Issue
+-----
+I only noticed this after the term was over, but the mouse getX and getY don't account for the screen getting scaled and/or translated.
+
+Fix
+---
+Can use code like this in main.lua.
+
+-- Get backups of existing getX and getY
+_mouseGetX = love.mouse.getX;
+_mouseGetY = love.mouse.getY;
+
+function love.mouse.getX()
+	print("Overridden mouse getX");
+	x = (_mouseGetX() - screenOffsetX) / scaling;
+	return x;
+	
+--	return _mouseGetX();
+end
+
+function love.mouse.getY()
+	print("Overridden mouse getY");
+	
+	y = (_mouseGetY() - screenOffsetY) / scaling;
+	
+	return y;
+	
+
+	-- return _mouseGetY();
+end

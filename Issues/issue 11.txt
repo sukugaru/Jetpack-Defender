@@ -1,0 +1,18 @@
+Basically you needed to declare some global variables in love.load.  Why not, at the very least, move those to flipDrop.lua?
+
+At the same time, filDrop.lua has drawBGImage(transparency).  To reduce the coupling, this is being called drawDroppedImage.
+
+File changes
+fileDrop.lua
+New version 0.1.1
+Moved global variables to this file
+Changed drawBGImage to drawDroppedImage
+
+
+game.lua
+New version 0.1.5
+Needs to use drawDroppedImage instead of drawBGImage
+
+main.lua
+New version 0.1.4
+Removed fileDrop variables from love.load()

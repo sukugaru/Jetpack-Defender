@@ -1,0 +1,33 @@
+Seeing as I don't have android and getting things onto my old iPhone will be too frustrating, my mobile device target is now my laptop.
+
+My base/design resolution is 640 x 360, for the 16:9 aspect ration.
+
+Then in love.load() I get the actual resolution, and from that I can get a scaling factor.
+
+e.g.
+
+baseRes.x = 640;
+baseRes.y = 360;
+
+require assets
+
+scaleX = baseRes.x / lib.windowWidth;
+scaleY = baseRes.y / lib.windowHeight;
+
+And then, to make sure calculations based on windowWidth and windowHeight are correct, also do:
+
+lib.actualWidth = lib.windowWidth;
+lib.actualHeight = lib.windowHeight;
+
+lib.windowWidth = lib.windowWidth * scaleX;
+lib.windowHeight = lib.windowHeight * scaleY;
+
+
+
+love.draw
+love.graphics.scale(scaleX, scaleY);
+look into push and pop
+
+
+
+This *should* mean that the various draw functions don't need any major rework.

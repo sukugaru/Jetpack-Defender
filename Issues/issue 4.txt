@@ -1,0 +1,24 @@
+Description
+-----------
+When starting the game or exiting from pause mode with space, this causes the player to fire.
+
+
+Analysis
+--------
+I had this same issue in Basic Invaders, and I resolved it by adding the speedlines intro sequence, adding four seconds between the title screen disappearing and gameplay actually starting.  I'm intending to do something similar with Jetpack Defender, and just haven't got around to it yet.  When it's added, that should resolve this problem.
+
+Fix
+---
+Basic Invaders' intro sequence was speedlines as the player flies onto screen.
+This game has speedlines as default so it wouldn't make as much of an impact, so I'm going with just a basic "Get ready!" screen.
+
+File changes
+------------
+main.lua v0.1.5 
+Making sure to include the new levelIntro.lua file
+
+levelIntro.lua v0.1
+New file for the new level intro state
+
+titleScreen.lua v0.1.4
+Start the game with levelIntro:start rather than game:start

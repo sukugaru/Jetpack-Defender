@@ -1,0 +1,15 @@
+new:
+logoScreen.lua (v0.9)
+titleIntro.lua (v0.9)
+highscores.lua( v0.9)
+
+
+changes:
+titleScreen.lua (v0.9.1)
+ - Removing most of it and putting it in new files above
+
+main.lua (v0.9.2)
+ - make sure to go to right state (logoscreen)
+
+gameOver.lua (v0.9.1)
+ - make sure to go to right state (logoscreen)

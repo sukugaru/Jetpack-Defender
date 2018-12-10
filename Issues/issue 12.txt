@@ -1,0 +1,39 @@
+High Scores
+-----------
+
+Previous sessions and work on this shows we need this:
+
+ - highscores table
+ - clear it in love.load
+ - then load from highscores.dat file, also in love.load()
+ - Save the player's score to the highscores table in gameOver:start()
+
+ - function saveHighScores() - I just need to do:
+
+function saveHighScores()
+	local scores = "";
+	for k, v in pairs(highScores) do
+		scores = scores .. game.score .. "\r\n";
+	end
+	
+	love.filesystem.write("highscores.dat", scores);
+	
+end
+
+Super simple but I know it works.
+
+Files being touched:
+main
+New version v0.1.3
+love.load loads the highscores and puts them into highscores table
+
+gameOver
+New version v0.1.3
+in gameOver.start the player's score is put into the highscore table
+highscore table is saved
+
+titleScreen
+New version v0.1.3
+interprets highscores and generates a string with the highscores in it
+displays that string during the title sequence
+

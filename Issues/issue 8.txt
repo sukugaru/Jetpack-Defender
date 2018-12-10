@@ -1,0 +1,25 @@
+Adding in a full invasion mode.
+
+game.lua v0.1.6
+Introduced a fair few number of things!
+scorePerEnemy to show how many points an enemy gives.
+FIScorePerEnemy to show how many points an enemy is worth during fullInvasionMode
+
+enemiesPastYou - how many have gone off the screen?
+fullInvasionLimit - how many are allowed to get past you?
+fullInvasionMax - how many will spawn during FI mode?
+fullInvasionMode - true if in full invasion mode
+
+progressBar - to display an invasion progress bar
+
+game:startFullInvasion()
+Sets a few variables and starts this mode
+
+game:draw()
+Draw the progress bar and a red tinge over everything in full invasion mode
+
+
+
+Fixes
+Also noticed that if you click on the start button, the title screen goes straight to gameplay, and doesn't go to the levelIntro state.  Need to fix this!
+titleScreen.lua v0.1.5

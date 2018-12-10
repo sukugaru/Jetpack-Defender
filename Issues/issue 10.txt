@@ -1,0 +1,45 @@
+Description
+-----------
+ControlBoost, ControlShoot, and ControlPause functions that can check all the possible input sources.
+
+Updates
+-------
+
+5/11/2018
+---------
+Part done - ControlBoost and ControlShoot are done in player.lua, but don't handle touchscreen input.
+Additionally, ControlPause is a bit trickier because we need to use keypressed and mousepressed (is there a touchPressed function?) to initiate.
+
+
+7/11/2018
+---------
+The mobile device being targeted is a laptop (it counts as a mobile) so we don't strictly need touchscreen inputs.  I'm investigating anyway for completeness.
+
+keypressed and mousepressed could set a variable saying PausePressed and then in update, when we detect PausePressed = true, initiate pause mode.
+
+
+7/11/2018 (later update)
+------------------------
+touchscreens are handled by the callback love.touchpressed or by love.touch.getPosition.
+
+The closest to isDown for touchScreen inputs is something like this:
+
+    (From https://love2d.org/wiki/love.touch.getPosition)
+
+    local touches = love.touch.getTouches()
+ 
+    for i, id in ipairs(touches) do
+        local x, y = love.touch.getPosition(id)
+	-- do something...
+    end
+
+I've put this into my code, with a touch on the leftside of the screen doing a boost, and a touch on the right side doing a shoot.  To see if this could work, I've modified the mouse code so it follows this same behaviour.
+
+-
+
+I'm using mouse input to simulate what I want touchscreen inputs to do:
+ - Hold LMB down on left side of screen - gives the player a boost
+ - Hold LMB down on right side of screen - shoots
+ - Click on the UI in the top part of the screen - pauses
+ - When paused, click anywhere to unpause.
+

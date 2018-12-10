@@ -1,0 +1,33 @@
+Sound effect playback
+
+Description
+-----------
+lib.lua has some sound playback routines.
+   One is multiSoundPlay().  This was my original approach, and it clones a Source and plays the cloned source.  This is so that a sound effect can be playing on top of itself.  (ie is playing on multiple channels.)
+   However Michael didn't like the idea of cloning a Source and suggested a different approach.  This is to load the sound effect as a SoundData object in assets, instead of as a Source.  Then when you want to multiple-channel-play it, create a new Source around this existing SoundData, and play the new source.  This is the second playback routine, playSoundData().
+   The idea is that SoundData is the actual sound data in memory (love.sound) and that Source objects (love.audio) are the sound playback system.  This second way ensures that sound data isn't getting needlessly copied.
+
+   When I first created these sound playback routines (around 31/10/2018) I tested them on my home PC, and the first way (multiSoundPlay) used much less RAM, being stable at around 45(ish) MB.  The second way (playSoundData) had runaway RAM usage, and could get up past 100MB.
+
+   When I tried to demonstrate the issue in class (7/11/2018), both had similar memory usage.  I am running another test on my home PC.
+
+   The class PC is Windows 7.  My home PC is Windows 8.  They may have different sound hardware - though it seems most PCs have standardised sound hardware these days.  I suppose the different OSes could do sound playback differently.
+
+Home PC:
+MultiSoundPlay()
+Leaving it on title screen for a while.  Assets have been loaded and title music is on loop.  Memory usage is 48.8 MB.
+   Test 1) After about a minute of play usage went up to 48.9MB.
+   Test 2) Mem usage is at 48.9 MB on title screen.  After a few minutes of play, usage stayed at 48.9MB.
+   Test 3) Mem usage is at 48/9 MB on title screen.  Once again, after a few minutes of play, usage stayed at 48.9MB.
+
+Changed game:killEnemy() to use playSoundData().
+Leaving it on title screen for a while again, with assets loaded and title music on loop.  Memory usage starts at 48.7MB and ups to 48.8MB in first 30 seconds.  After a while it's gone back to 48.7MB.
+   Test 1) After about a minute of play usage, I saw memory usage getting up to 50MB, but by the end of gameplay it had dropped to 49.2MB.
+   Test 2) Starting with 49.2 MB, and played for a couple of minutes.  Once again, I saw usage going up past 50MB, but at Game Over, the memory usage had dropped down to 49.5MB.
+   Test 3) Starting with 49.5MB.  Observed same behaviour.  Memory usage went above 50MB during play, but at game over, the memory usage had dropped again and was at 49.3MB.
+
+
+CONCLUSION
+----------
+After this testing I'm going to say that this issue is not a problem for Jetpack Defender, and either sound routine can be used without much impact on memory usage.
+   I can't explain why my first test of the sound routines was so drastically different.  It was with a different sound effect that was 406KB, whereas Jetpack's explosion effect is only 42KB, but I still don't understand how I got runaway memory usage over 100MB.  This may be something worth re-investigating in future projects that have many more sound effects.
